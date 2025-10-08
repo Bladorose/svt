@@ -1,0 +1,335 @@
+:root {
+  color-scheme: light;
+  font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+  --accent: #2c7be5;
+  --accent-dark: #1b5fbf;
+  --surface: #ffffff;
+  --background: #f4f7fb;
+  --text: #1f2a44;
+  --muted: #5b6b8b;
+  --border: #d3d9e6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+header,
+footer {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 1px 8px rgba(31, 42, 68, 0.05);
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  border-bottom: none;
+  margin-top: 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2vw + 1rem, 2.2rem);
+}
+
+header p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.student-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 24px -20px rgba(31, 42, 68, 0.45);
+}
+
+.student-form h2,
+.organ-pool h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.9rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.2);
+}
+
+.form-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.organ-pool {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 24px -20px rgba(31, 42, 68, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.organ-pool.over {
+  border-color: var(--accent);
+  background: rgba(44, 123, 229, 0.08);
+}
+
+.organ-pool .instructions {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+}
+
+.organ {
+  background: rgba(44, 123, 229, 0.1);
+  border: 2px dashed var(--accent);
+  color: var(--accent-dark);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: grab;
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.drop-zone .organ {
+  width: 100%;
+}
+
+.organ:focus,
+.organ:hover {
+  outline: none;
+  box-shadow: 0 8px 18px -14px rgba(44, 123, 229, 0.8);
+  transform: translateY(-2px);
+}
+
+.organ:active {
+  cursor: grabbing;
+}
+
+.workspace {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 20px 30px -22px rgba(31, 42, 68, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.workspace h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.body-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body-silhouette {
+  position: relative;
+  width: clamp(260px, 28vw, 360px);
+  height: clamp(520px, 62vh, 640px);
+  background: #f8f2ef url('assets/body-outline.svg') center/contain no-repeat;
+  border-radius: 28px;
+  box-shadow: 0 30px 50px -40px rgba(31, 42, 68, 0.65);
+}
+
+.drop-zone {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 12%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: 2px dashed rgba(44, 123, 229, 0.45);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.drop-zone[data-organ="trachee"] {
+  top: 18%;
+  width: 22%;
+  height: 8%;
+  min-height: 40px;
+  border-radius: 50px;
+}
+
+.drop-zone[data-organ="poumons"] {
+  top: 31%;
+  width: 64%;
+  height: 20%;
+  border-radius: 120px;
+}
+
+.drop-zone[data-organ="coeur"] {
+  top: 41%;
+  left: 46%;
+  width: 26%;
+  height: 12%;
+  border-radius: 70px;
+}
+
+.drop-zone[data-organ="estomac"] {
+  top: 54%;
+  left: 60%;
+  width: 30%;
+  height: 14%;
+  border-radius: 70px;
+}
+
+.drop-zone[data-organ="foie"] {
+  top: 56%;
+  left: 40%;
+  width: 40%;
+  height: 14%;
+  border-radius: 80px;
+}
+
+.drop-zone[data-organ="intestin"] {
+  top: 70%;
+  width: 48%;
+  height: 22%;
+  border-radius: 60px;
+}
+
+.drop-zone.over {
+  border-color: var(--accent);
+  background: rgba(44, 123, 229, 0.18);
+  box-shadow: 0 0 0 4px rgba(44, 123, 229, 0.12);
+}
+
+.drop-zone.correct {
+  border-style: solid;
+  border-color: #31c48d;
+  background: rgba(49, 196, 141, 0.25);
+  box-shadow: 0 0 0 4px rgba(49, 196, 141, 0.18);
+}
+
+.drop-zone.incorrect {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(-50%, -50%); }
+  20%, 60% { transform: translate(calc(-50% - 6px), -50%); }
+  40%, 80% { transform: translate(calc(-50% + 6px), -50%); }
+}
+
+.organ.drop-preview {
+  opacity: 0.6;
+}
+
+.status {
+  min-height: 1.5rem;
+  font-weight: 600;
+}
+
+.status.success {
+  color: #046c4e;
+}
+
+.status.error {
+  color: #c81e1e;
+}
+
+.reset {
+  align-self: flex-end;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.reset:hover {
+  background: var(--accent-dark);
+}
+
+.reset:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    order: -1;
+  }
+}
+
+@media (max-width: 540px) {
+  header,
+  footer,
+  .layout {
+    padding: 1.25rem;
+  }
+
+  .workspace {
+    padding: 1.25rem;
+  }
+
+  .body-silhouette {
+    width: 220px;
+    height: 420px;
+  }
+}

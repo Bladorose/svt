@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier SVT - Corps humain</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Atelier SVT : placer les organes</h1>
+    <p>Complète le formulaire puis glisse chaque organe au bon endroit sur le schéma du corps humain.</p>
+  </header>
+
+  <main class="layout">
+    <section class="sidebar">
+      <form class="student-form" id="student-form">
+        <h2>Informations élève</h2>
+        <label for="first-name">Prénom <span aria-hidden="true">*</span></label>
+        <input type="text" id="first-name" name="first-name" required>
+
+        <label for="last-name">Nom <span aria-hidden="true">*</span></label>
+        <input type="text" id="last-name" name="last-name" required>
+
+        <label for="class">Classe <span aria-hidden="true">*</span></label>
+        <input type="text" id="class" name="class" required>
+
+        <p class="form-hint">Tous les champs sont obligatoires.</p>
+      </form>
+
+      <section class="organ-pool" aria-labelledby="organ-pool-title">
+        <h2 id="organ-pool-title">Organes à placer</h2>
+        <p class="instructions">Fais glisser chaque carte vers le schéma.</p>
+        <div class="organ" draggable="true" id="organ-trachee" data-organ="trachee" role="button" tabindex="0" aria-grabbed="false">Trachée</div>
+        <div class="organ" draggable="true" id="organ-poumons" data-organ="poumons" role="button" tabindex="0" aria-grabbed="false">Poumons</div>
+        <div class="organ" draggable="true" id="organ-coeur" data-organ="coeur" role="button" tabindex="0" aria-grabbed="false">Cœur</div>
+        <div class="organ" draggable="true" id="organ-estomac" data-organ="estomac" role="button" tabindex="0" aria-grabbed="false">Estomac</div>
+        <div class="organ" draggable="true" id="organ-foie" data-organ="foie" role="button" tabindex="0" aria-grabbed="false">Foie</div>
+        <div class="organ" draggable="true" id="organ-intestin" data-organ="intestin" role="button" tabindex="0" aria-grabbed="false">Intestin</div>
+      </section>
+    </section>
+
+    <section class="workspace">
+      <h2>Schéma du corps humain</h2>
+      <div class="body-container">
+        <div class="body-silhouette" aria-label="Silhouette du corps humain">
+          <div class="drop-zone" data-organ="trachee" aria-label="Zone pour la trachée"></div>
+          <div class="drop-zone" data-organ="poumons" aria-label="Zone pour les poumons"></div>
+          <div class="drop-zone" data-organ="coeur" aria-label="Zone pour le cœur"></div>
+          <div class="drop-zone" data-organ="estomac" aria-label="Zone pour l'estomac"></div>
+          <div class="drop-zone" data-organ="foie" aria-label="Zone pour le foie"></div>
+          <div class="drop-zone" data-organ="intestin" aria-label="Zone pour l'intestin"></div>
+        </div>
+      </div>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+      <button type="button" class="reset" id="reset">Réinitialiser les organes</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Glisse-dépose créé pour un atelier numérique de SVT.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
