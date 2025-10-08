@@ -4,6 +4,15 @@ const dropZones = Array.from(document.querySelectorAll('.drop-zone'));
 const status = document.getElementById('status');
 const resetButton = document.getElementById('reset');
 
+const organLabels = {
+  trachee: 'Trachée',
+  poumons: 'Poumons',
+  coeur: 'Cœur',
+  estomac: 'Estomac',
+  foie: 'Foie',
+  intestin: 'Intestin',
+};
+
 function onDragStart(event) {
   const organId = event.target.id;
   event.dataTransfer.setData('text/plain', organId);
@@ -109,9 +118,14 @@ function resetBoard() {
     if (organ) {
       resetOrgan(organ);
     }
-    zone.textContent = '';
+    zone.innerHTML = `<span>${organLabels[zone.dataset.organ] || capitalize(zone.dataset.organ)}</span>`;
   });
   statusUpdate('Organes réinitialisés. Tu peux recommencer !');
+}
+
+function capitalize(value) {
+  if (!value) return '';
+  return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
 function enablePoolDropZone() {
